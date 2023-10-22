@@ -1,8 +1,11 @@
 package org.example;
 
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.print("oie");
+    public static void main(String[] args) throws IOException {
+        Adaline adaline = new Adaline();
+        adaline.executeAdaline();
     }
 }

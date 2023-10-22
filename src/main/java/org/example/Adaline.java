@@ -4,9 +4,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adaline {
+
+    ArrayList<Double> errors = new ArrayList<Double>();
+
+    ArrayList<Double> squareErrors = new ArrayList<Double>();
 
     File file = new File("erros.txt");
     FileWriter fw = new FileWriter(file);
@@ -59,13 +64,19 @@ public class Adaline {
     }
 
     public double calculateError(double target, double y) throws IOException {
-        this.writer.write(" " + this.error);
+        double error = target - y;
+        this.writer.write(" " + error);
+        this.writer.write(" " + (error * error));
         writer.newLine();
-        return target - y;
+        this.errors.add(error);
+        this.squareErrors.add(error * error);
+        return error;
     }
 
-    public double calculateSquareError(double error) {
-        return error * error;
+    public double calculateSquareError(double error) throws IOException {
+        double errorSquare = error*error;
+        this.squareErrors.add(errorSquare);
+        return errorSquare;
     }
 
     public double calculateNewWeight(double error) {
@@ -77,6 +88,9 @@ public class Adaline {
         this.initiateWeights();
         try {
             System.out.println("W1: " + weight.getW1() + "; W2: " + weight.getW2() + "; bias: " + weight.getBias());
+
+            this.writer.write("u x");
+            writer.newLine();
 
             do {
                 y = calculateY(dataPortOR.getLine1()[0], dataPortOR.getLine1()[1]);

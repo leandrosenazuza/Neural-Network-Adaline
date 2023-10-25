@@ -84,7 +84,6 @@ public class Adaline {
     }
 
     public void executeAdaline() {
-        int i = 0;
         this.initiateWeights();
         try {
             System.out.println("W1: " + weight.getW1() + "; W2: " + weight.getW2() + "; bias: " + weight.getBias());
